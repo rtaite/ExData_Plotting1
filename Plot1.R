@@ -1,0 +1,6 @@
+consraw <- read.table("household_power_consumption.txt",header = TRUE, sep = ";",na.strings = "?")
+consrawdt <- cbind(Date = as.POSIXct(consraw$Date, format="%d/%m/%Y"),consraw[c(3)])
+consplot <- subset(consrawdt, Date >= "2007-02-01" & Date <= "2007-02-02")
+png("Plot1.png")
+hist(consplot$Global_active_power, col = "red", xlab = "Global Active Power (kilowatts)", main = "Global Active Power")
+dev.off()

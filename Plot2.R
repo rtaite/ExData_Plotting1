@@ -1,0 +1,7 @@
+consraw <- read.table("household_power_consumption.txt",header = TRUE, sep = ";",na.strings = "?")
+consrawdt <- cbind(DateTime = as.POSIXct(paste(consraw$Date,consraw$Time), format="%d/%m/%Y %H:%M:%S"),consraw[c(3)])
+consplot <- subset(consrawdt, DateTime >= "2007-02-01 00:00:00" & DateTime <= "2007-02-02 23:59:59")
+consplot <- cbind(consplot[c(1:2)],dow = weekdays(consplot$Date, abbreviate = TRUE))
+png("Plot2.png")
+plot(consplot$DateTime,consplot$Global_active_power,ylab = "Global Active Power (kilowatts)",xlab="",type="l")
+dev.off()
